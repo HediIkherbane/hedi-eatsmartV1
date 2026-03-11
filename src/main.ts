@@ -1,5 +1,4 @@
-import './style.css'
-
+import './style.css';
 interface Plat {
   id: number;
   nom: string;
@@ -8,26 +7,27 @@ interface Plat {
   disponible: boolean;
 }
 
+
 const plats: Plat[] = [
   { 
     id: 1, 
-    nom: "Pizza Margherita", 
-    prix: 12.50, 
-    description: "Tomate, mozzarella, basilic frais", 
+    nom: "Anchois 23cm", 
+    prix: 7.9, 
+    description: "Sauce tomate premium , origan huile d'olive extra vierge , anchois , olive", 
     disponible: true 
   },
   { 
     id: 2, 
-    nom: "Burger Classic", 
-    prix: 15.00, 
-    description: "Bœuf, cheddar, salade, frites", 
+    nom: "Emmental 23cm", 
+    prix: 7.9, 
+    description: "sauce tomate premium origan huile d'olive extra vierge emmental basilic olive", 
     disponible: true 
   },
   { 
     id: 3, 
-    nom: "Salade César", 
-    prix: 11.00, 
-    description: "Poulet grillé, croûtons, parmesan", 
+    nom: "Margherita 23cm", 
+    prix: 7.9, 
+    description: "sauce tomate premium origan huile d'olive extra vierge mozzarella basilic olive", 
     disponible: false 
   }
 ];
@@ -35,18 +35,30 @@ const plats: Plat[] = [
 console.table(plats);
 
 
-const container = document.querySelector<HTMLElement>('.menu-container');
 
-if (container) {
-  // On génère le HTML pour chaque plat
-  container.innerHTML = plats.map((plat: Plat) => `
-    <div class="card">
-      <h3>${plat.nom}</h3>
-      <p>${plat.description}</p>
-      <p>Prix : <strong>${plat.prix.toFixed(2)} €</strong></p>
-      ${plat.disponible 
-        ? `<button class="btn-order">Commander</button>` 
-        : `<p class="sold-out">Épuisé</p>`}
-    </div>
-  `).join('');
+const app = document.querySelector<HTMLElement>('#app');
+
+
+if (app) {
+  
+  const cartesHTML = plats.map((plat: Plat) => {
+    return `
+      <article class="card">
+        <h2>${plat.nom}</h2>
+        <p>${plat.description}</p>
+        <p>Prix : <strong>${plat.prix.toFixed(2)} €</strong></p>
+      </article>
+    `;
+  }).join(''); 
+
+
+  app.innerHTML = `
+    <header>
+      <h1>EatSmart - Carte du Restaurant</h1>
+    </header>
+    
+    <main class="menu-container">
+      ${cartesHTML}
+    </main>
+  `;
 }
